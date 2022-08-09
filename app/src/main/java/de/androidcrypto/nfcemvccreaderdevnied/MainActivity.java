@@ -29,11 +29,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.github.devnied.emvnfccard.enums.EmvCardScheme;
-import com.github.devnied.emvnfccard.iso7816emv.EmvTags;
 import com.github.devnied.emvnfccard.model.Application;
 import com.github.devnied.emvnfccard.model.EmvCard;
 import com.github.devnied.emvnfccard.parser.EmvTemplate;
-import com.github.devnied.emvnfccard.utils.TlvUtil;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -41,8 +39,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import de.androidcrypto.nfcemvccreaderdevnied.model.EmvCardAnalyze;
-import de.androidcrypto.nfcemvccreaderdevnied.utils.ApplicationInterchangeProfile;
 import fr.devnied.bitlib.BytesUtils;
 
 public class MainActivity extends AppCompatActivity implements NfcAdapter.ReaderCallback {

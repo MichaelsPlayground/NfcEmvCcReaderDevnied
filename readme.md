@@ -21,6 +21,5 @@ https://github.com/AndroidCrypto/Android-EMV-NFC-Paycard-Example
 Don't forget to view the Logcat as the app gives a deep look to the commands and data
 that is exchanged between the Android device and the EMV card
 
-Some outputs from the SASC999 Reader: https://code.google.com/archive/p/javaemvreader/wikis/ExampleOutput.wiki
 
 
