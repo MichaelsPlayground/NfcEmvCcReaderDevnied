@@ -343,8 +343,6 @@ public class MainActivity extends AppCompatActivity implements NfcAdapter.Reader
         mExportMail.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                //Intent i = new Intent(MainActivity.this, AddEntryActivity.class);
-                //startActivity(i);
                 exportDumpMail();
                 return false;
             }
@@ -354,8 +352,6 @@ public class MainActivity extends AppCompatActivity implements NfcAdapter.Reader
         mExportFile.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                //Intent i = new Intent(MainActivity.this, AddEntryActivity.class);
-                //startActivity(i);
                 exportDumpFile();
                 return false;
             }
