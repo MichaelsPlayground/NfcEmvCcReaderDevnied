@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import de.androidcrypto.nfcemvccreaderdevnied.model.EmvCardAnalyze;
 import fr.devnied.bitlib.BytesUtils;
 
 /**
@@ -55,17 +56,18 @@ import fr.devnied.bitlib.BytesUtils;
  * @author julien
  *
  */
-public class EmvParserOrg extends AbstractParser {
+public class EmvParser extends AbstractParser {
 
 	/**
 	 * Class Logger
 	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(EmvParserOrg.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(EmvParser.class);
 
 	/**
 	 * Default EMV pattern
 	 */
 	private static final Pattern PATTERN = Pattern.compile(".*");
+	private final EmvCardAnalyze emvCardAnalyze;
 
 	/**
 	 * Default constructor
@@ -73,8 +75,10 @@ public class EmvParserOrg extends AbstractParser {
 	 * @param pTemplate
 	 *            parser template
 	 */
-	public EmvParserOrg(EmvTemplate pTemplate) {
+	//public EmvParser(EmvTemplate pTemplate) {
+	public EmvParser(EmvTemplate pTemplate, EmvCardAnalyze pEmvCardAnalyze) {
 		super(pTemplate);
+		this.emvCardAnalyze = pEmvCardAnalyze;
 	}
 
 	@Override
@@ -147,8 +151,6 @@ public class EmvParserOrg extends AbstractParser {
 		}
 		return type;
 	}
-
-
 
 	/**
 	 * Method used to parse EMV card
@@ -290,7 +292,12 @@ public class EmvParserOrg extends AbstractParser {
 		} catch (IOException ioe) {
 			LOGGER.error("Construct GPO Command:" + ioe.getMessage(), ioe);
 		}
-		return template.get().getProvider().transceive(new CommandApdu(CommandEnum.GPO, out.toByteArray(), 0).toBytes());
+		byte[] apduGetProcessingOptionsCommand = new CommandApdu(CommandEnum.GPO, out.toByteArray(), 0).toBytes();
+		byte[] apduGetProcessingOptionsResponse = template.get().getProvider().transceive(apduGetProcessingOptionsCommand);
+		emvCardAnalyze.setApduGetProcessingOptionsCommand(apduGetProcessingOptionsCommand);
+		emvCardAnalyze.setApduGetProcessingOptionsResponse(apduGetProcessingOptionsResponse);
+		return apduGetProcessingOptionsResponse;
+		//return template.get().getProvider().transceive(new CommandApdu(CommandEnum.GPO, out.toByteArray(), 0).toBytes());
 	}
 
 	/**

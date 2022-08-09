@@ -43,7 +43,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import de.androidcrypto.nfcemvccreaderdevnied.model.EmvCardAnalyze;
 import fr.devnied.bitlib.BytesUtils;
 
 /**
@@ -67,7 +66,6 @@ public class EmvParser extends AbstractParser {
 	 * Default EMV pattern
 	 */
 	private static final Pattern PATTERN = Pattern.compile(".*");
-	private final EmvCardAnalyze emvCardAnalyze;
 
 	/**
 	 * Default constructor
@@ -75,10 +73,8 @@ public class EmvParser extends AbstractParser {
 	 * @param pTemplate
 	 *            parser template
 	 */
-	//public EmvParser(EmvTemplate pTemplate) {
-	public EmvParser(EmvTemplate pTemplate, EmvCardAnalyze pEmvCardAnalyze) {
+	public EmvParser(EmvTemplate pTemplate) {
 		super(pTemplate);
-		this.emvCardAnalyze = pEmvCardAnalyze;
 	}
 
 	@Override
@@ -151,6 +147,8 @@ public class EmvParser extends AbstractParser {
 		}
 		return type;
 	}
+
+
 
 	/**
 	 * Method used to parse EMV card
@@ -292,12 +290,7 @@ public class EmvParser extends AbstractParser {
 		} catch (IOException ioe) {
 			LOGGER.error("Construct GPO Command:" + ioe.getMessage(), ioe);
 		}
-		byte[] apduGetProcessingOptionsCommand = new CommandApdu(CommandEnum.GPO, out.toByteArray(), 0).toBytes();
-		byte[] apduGetProcessingOptionsResponse = template.get().getProvider().transceive(apduGetProcessingOptionsCommand);
-		emvCardAnalyze.setApduGetProcessingOptionsCommand(apduGetProcessingOptionsCommand);
-		emvCardAnalyze.setApduGetProcessingOptionsResponse(apduGetProcessingOptionsResponse);
-		return apduGetProcessingOptionsResponse;
-		//return template.get().getProvider().transceive(new CommandApdu(CommandEnum.GPO, out.toByteArray(), 0).toBytes());
+		return template.get().getProvider().transceive(new CommandApdu(CommandEnum.GPO, out.toByteArray(), 0).toBytes());
 	}
 
 	/**

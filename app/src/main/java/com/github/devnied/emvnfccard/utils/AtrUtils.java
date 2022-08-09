@@ -16,9 +16,6 @@
 
 package com.github.devnied.emvnfccard.utils;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 import org.apache.commons.io.IOUtils;
@@ -33,9 +30,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import de.androidcrypto.nfcemvccreaderdevnied.App;
-import de.androidcrypto.nfcemvccreaderdevnied.R;
 
 /**
  * Class used to find ATR description
